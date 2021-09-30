@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 
 #include "Book.h"
 #include "ISBN_code.h"
@@ -17,9 +18,28 @@ vector<Book> library;
 const int Date::days_in_month[12]
 = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
+int i;
+string n1, n2;
+
+string CreateName()
+{
+
+	n1.clear();
+	n2.clear();
+
+	n1.push_back(rand() % 26 + 0x41);
+	for (i = 0; i < (rand() % 7 + 3); ++i) n1.push_back(rand() % 26 + 0x61);
+
+	n2.push_back(rand() % 26 + 0x41);
+	for (i = 0; i < (rand() % 7 + 3); ++i) n2.push_back(rand() % 26 + 0x61);
+
+	return n1 + " " + n2;
+}
 
 
 int main() {
+
+	srand(time(0));
 
 	ISBN_code b1_isbn(0, 0, 0, 0, '0');
 	ISBN_code b2_isbn(1, 0, 0, 0, '0');
@@ -28,8 +48,8 @@ int main() {
 
 	string a = "Book Name";
 
-	Book b1(b1_isbn, a, "Auth Name", b1_date, Book::periodic);
-	Book b2(b2_isbn, "Book Name 2", "Auth Name 2", b1_date, Book::fantasy);
+	Book b1(b1_isbn, a, CreateName(), b1_date, Book::periodic);
+	Book b2(b2_isbn, "Book Name 2", CreateName(), b1_date, Book::fantasy);
 
 	library.push_back(b1);
 	library.push_back(b2);
